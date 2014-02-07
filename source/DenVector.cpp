@@ -6,17 +6,97 @@
 //  Copyright (c) 2014 ijk. All rights reserved.
 //
 
-#include "DenVector.h"
+#include "DenVectorImpl.h"
 #include <math.h>
 
 //
 //
 //
-void DENVector::add(const DENVector &v)
+DENVector::DENVector(double x, double y, double z)
+    : mImpl(new DENVectorImpl(x,y,z))
 {
-    this->mX += v.mX;
-    this->mY += v.mY;
-    this->mZ += v.mZ;
+}
+
+//
+//
+//
+DENVector::DENVector(const DENVector& other)
+    : mImpl(other.mImpl->clone())
+{
+}
+
+//
+//
+//
+void DENVector::invert()
+{
+    mImpl->invert();
+}
+
+//
+//
+//
+void DENVector::scale(double scaleFactor)
+{
+    mImpl->scale(scaleFactor);
+}
+
+//
+//
+//
+void DENVector::init()
+{
+    mImpl->init();
+}
+
+//
+//
+//
+double DENVector::x() const
+{
+    return mImpl->z();
+}
+
+//
+//
+//
+double DENVector::y() const
+{
+    return mImpl->y();
+}
+
+//
+//
+//
+double DENVector::z() const
+{
+    return mImpl->z();
+}
+
+//
+//
+//
+const DENVector& DENVector::operator+(const DENVector& rhs)
+{
+    mImpl->x() = mImpl->x() + rhs.x();
+    mImpl->y() = mImpl->y() + rhs.y();
+    mImpl->z() = mImpl->z() + rhs.z();
+    
+    return *this;
+}
+
+//
+//
+//
+const DENVector& DENVector::operator=(const DENVector& rhs)
+{
+    if (this != &rhs) {
+        mImpl->x() = rhs.x();
+        mImpl->y() = rhs.y();
+        mImpl->z() = rhs.z();
+    }
+
+    return *this;
 }
 
 //
@@ -24,7 +104,7 @@ void DENVector::add(const DENVector &v)
 //
 double DENVector::magnitude() const
 {
-    return sqrt(squareMagnitude());
+    return mImpl->magnitude(); 
 }
 
 //
@@ -32,7 +112,7 @@ double DENVector::magnitude() const
 //
 double DENVector::squareMagnitude() const
 {
-    return mX*mX + mY*mY + mZ*mZ;
+    return mImpl->squareMagnitude();
 }
 
 //
@@ -40,13 +120,7 @@ double DENVector::squareMagnitude() const
 //
 void DENVector::normalize()
 {
-    double n = magnitude();
-    
-    if (n > 0) {
-        mX /= n;
-        mY /= n;
-        mZ /= n;
-    }
+    mImpl->normalize();
 }
 
 //
@@ -54,84 +128,58 @@ void DENVector::normalize()
 //
 void DENVector::multiply(double scalar)
 {
-    scale(scalar);
+    mImpl->scale(scalar);
 }
 
 //
 //
 //
-void DENVector.add = function() {
-    if (arguments.length == 2) {
-        var v = new DENVector();
-        
-        v.x = (arguments[0].x || 0) + (arguments[1].x || 0);
-        v.y = (arguments[0].y || 0) + (arguments[1].y || 0);
-        v.z = (arguments[0].z || 0) + (arguments[1].z || 0);
-        
-        return v;
-    }
+DENVector DENVector::add(const DENVector& v1, const DENVector& v2)
+{
+    return DENVector(v1.x() + v2.x(), v1.y() + v2.y(), v1.z() + v2.z());
 }
 
-//
 //
 // scalarProduct or dotProduct
 //
 //
-DENVector.scalarProduct = function() {
-    if (arguments.length == 2) {
-        var result = (arguments[0].x || 0) * (arguments[1].x || 0) +
-        (arguments[0].y || 0) * (arguments[1].y || 0) +
-        (arguments[0].z || 0) * (arguments[1].z || 0);
-        
-        return result;
-    }
+DENVector DENVector::scalarProduct(const DENVector& v1, const DENVector& v2)
+{
+    return DENVector(v1.x()*v2.x(), v1.y()*v2.y(), v1.z()*v2.z());
 }
 
 //
 // vector product or cross product
 //
-DENVector.vectorProduct = function() {
-    if (arguments.length == 2) {
-        var v = new DENVector();
-        
-        v.x = (arguments[0].y || 0) * (arguments[1].z || 0) -
-        (arguments[0].z || 0) * (arguments[1].y || 0);
-        
-        v.y = (arguments[0].z || 0) * (arguments[1].x || 0) -
-        (arguments[0].x || 0) * (arguments[1].z || 0);
-        
-        v.z = (arguments[0].x || 0) * (arguments[1].y || 0) -
-        (arguments[0].y || 0) * (arguments[1].x || 0);
-        
-        return v;
-    }
+DENVector DENVector::vectorProduct(const DENVector& v1, const DENVector& v2)
+{
+    return DENVector(v1.y()*v2.z() - v1.z()*v2.y(),
+                     v1.z()*v2.x() - v1.x()*v2.z(),
+                     v1.x()*v2.y() - v1.y()*v2.x());
 }
 
 //
 //
 //
-DENVector.normal = function() {
-    if (arguments.length == 1) {
-        var v = new DENVector(arguments[0].x || 0, arguments[0].y || 0, arguments[0].z || 0);
-        
-        v.normalize();
-        
-        return v;
-    }
+DENVector DENVector::normal(const DENVector& v)
+{
+    DENVector normalizedVector = v;
+    
+    normalizedVector.normalize();
+    
+    return normalizedVector;
 }
 
 //
 //
 //
-DENVector.scale = function() {
-    if (arguments.length == 2) {
-        var v = new DENVector(arguments[0].x || 0, arguments[0].y || 0, arguments[0].z || 0);
-        var scaleFactor = arguments[1];
-        
-        v.multiply(scaleFactor);
-        
-        return v;
-    }
+DENVector DENVector::scale(const DENVector& v, double scaleFactor)
+{
+    DENVector scaledVector = v;
+    
+    scaledVector.multiply(scaleFactor);
+
+    return scaledVector;
 }
 
 
