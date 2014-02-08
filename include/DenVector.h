@@ -12,36 +12,46 @@
 #include <boost/shared_ptr.hpp>
 
 //
+// DENVector
 //
+// Represents vector with x,y,z component
 //
 class DENVector {
 public:
     DENVector(double x = 0, double y = 0, double z = 0);
     DENVector(const DENVector& other);
     ~DENVector() {}
+    const DENVector& operator=(const DENVector& rhs);
+    const DENVector& operator+(const DENVector& rhs);
+    // Invert individual components of a vector
     void invert();
+    // Scale vector with the given scale factor
     void scale(double scaleFactor);
-    void init();
+    // Reset vector - set all components to 0
+    void reset();
+    // x, y, and x components
     double x() const;
     double y() const;
     double z() const;
+    // Maginitue of a vector
     double magnitude() const;
+    // Square magnitude - square is faster than square root.
     double squareMagnitude() const;
+    // Normalize the vector
     void normalize();
-    void multiply(double scalar);
-    
-    const DENVector& operator=(const DENVector& rhs);
-    const DENVector& operator+(const DENVector& rhs);
-    //
+    // General methods which return new vector instead of modifying the existing vector.
     static DENVector add(const DENVector& v1, const DENVector& v2);
     static DENVector scalarProduct(const DENVector& v1, const DENVector& v2);
     static DENVector vectorProduct(const DENVector& v1, const DENVector& v2);
     static DENVector normal(const DENVector& v);
     static DENVector scale(const DENVector& v, double scaleFactor);
 private:
-    class DENVectorImpl;
+    void swap(DENVector& other) { d.swap(other.d); }
+
+private:
+    class Private;
     
-    boost::shared_ptr<DENVectorImpl> mImpl;
+    boost::shared_ptr<Private> d;
 };
 
 

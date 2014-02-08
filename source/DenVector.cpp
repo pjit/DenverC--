@@ -6,14 +6,84 @@
 //  Copyright (c) 2014 ijk. All rights reserved.
 //
 
-#include "DenVectorImpl.h"
+#include "DenVector.h"
 #include <math.h>
+
+//
+// DENVector::Private
+//
+// Actual implementation of DENVector
+//
+class DENVector::Private {
+public:
+    Private(double x = 0, double y = 0, double z = 0)
+    : mX(x), mY(y), mZ(z) {}
+    Private(const Private& other) {
+        mX = other.mX; mY = other.mY; mZ = other.mZ;
+    }
+    Private() {}
+    Private *clone() const { return new Private(*this); }
+    // Invert individual components of a vector
+    inline void invert() { mX = -mX; mY = -mY; mZ = -mZ; }
+    // Scale vector with the given scale factor
+    inline void scale(double scaleFactor) {
+        mX *= scaleFactor;
+        mY *= scaleFactor;
+        mZ *= scaleFactor;
+    }
+    // Reset vector - set all components to 0
+    inline void reset() { mX = mY = mZ = 0; }
+    // Maginitue of a vector
+    double magnitude() const;
+    // Square magnitude - square is faster than square root.
+    double squareMagnitude() const;
+    // Normalize the vector
+    void normalize();
+    const Private& operator=(const Private& rhs);
+    const Private& operator+(const Private& rhs);
+public: // Ok to have them public - already hidden for clients
+    double mX, mY, mZ;
+};
+
+//
+//
+//
+double DENVector::Private::magnitude() const
+{
+    return sqrt(squareMagnitude());
+}
+
+//
+//
+//
+double DENVector::Private::squareMagnitude() const
+{
+    return mX*mX + mY*mY + mZ*mZ;
+}
+
+//
+//
+//
+void DENVector::Private::normalize()
+{
+    double n = magnitude();
+    
+    if (n > 0) {
+        mX /= n;
+        mY /= n;
+        mZ /= n;
+    }
+}
+
+//
+// DENVector Class
+//
 
 //
 //
 //
 DENVector::DENVector(double x, double y, double z)
-    : mImpl(new DENVectorImpl(x,y,z))
+    : d(new Private(x,y,z))
 {
 }
 
@@ -21,7 +91,7 @@ DENVector::DENVector(double x, double y, double z)
 //
 //
 DENVector::DENVector(const DENVector& other)
-    : mImpl(other.mImpl->clone())
+    : d(other.d->clone())
 {
 }
 
@@ -30,7 +100,7 @@ DENVector::DENVector(const DENVector& other)
 //
 void DENVector::invert()
 {
-    mImpl->invert();
+    d->invert();
 }
 
 //
@@ -38,39 +108,39 @@ void DENVector::invert()
 //
 void DENVector::scale(double scaleFactor)
 {
-    mImpl->scale(scaleFactor);
+    d->scale(scaleFactor);
 }
 
 //
 //
 //
-void DENVector::init()
+void DENVector::reset()
 {
-    mImpl->init();
+    d->reset();
 }
 
 //
 //
 //
-double DENVector::x() const
+inline double DENVector::x() const
 {
-    return mImpl->z();
+    return d->mX;
 }
 
 //
 //
 //
-double DENVector::y() const
+inline double DENVector::y() const
 {
-    return mImpl->y();
+    return d->mY;
 }
 
 //
 //
 //
-double DENVector::z() const
+inline double DENVector::z() const
 {
-    return mImpl->z();
+    return d->mZ;
 }
 
 //
@@ -78,9 +148,9 @@ double DENVector::z() const
 //
 const DENVector& DENVector::operator+(const DENVector& rhs)
 {
-    mImpl->x() = mImpl->x() + rhs.x();
-    mImpl->y() = mImpl->y() + rhs.y();
-    mImpl->z() = mImpl->z() + rhs.z();
+    d->mX += rhs.x();
+    d->mY += rhs.y();
+    d->mZ += rhs.z();
     
     return *this;
 }
@@ -91,9 +161,13 @@ const DENVector& DENVector::operator+(const DENVector& rhs)
 const DENVector& DENVector::operator=(const DENVector& rhs)
 {
     if (this != &rhs) {
-        mImpl->x() = rhs.x();
-        mImpl->y() = rhs.y();
-        mImpl->z() = rhs.z();
+        DENVector copy(rhs);
+        
+        d->mX = rhs.x();
+        d->mY = rhs.y();
+        d->mZ = rhs.z();
+        
+        this->swap(copy);
     }
 
     return *this;
@@ -104,7 +178,7 @@ const DENVector& DENVector::operator=(const DENVector& rhs)
 //
 double DENVector::magnitude() const
 {
-    return mImpl->magnitude(); 
+    return d->magnitude();
 }
 
 //
@@ -112,7 +186,7 @@ double DENVector::magnitude() const
 //
 double DENVector::squareMagnitude() const
 {
-    return mImpl->squareMagnitude();
+    return d->squareMagnitude();
 }
 
 //
@@ -120,15 +194,7 @@ double DENVector::squareMagnitude() const
 //
 void DENVector::normalize()
 {
-    mImpl->normalize();
-}
-
-//
-// Multiply by scalar
-//
-void DENVector::multiply(double scalar)
-{
-    mImpl->scale(scalar);
+    d->normalize();
 }
 
 //
@@ -177,7 +243,7 @@ DENVector DENVector::scale(const DENVector& v, double scaleFactor)
 {
     DENVector scaledVector = v;
     
-    scaledVector.multiply(scaleFactor);
+    scaledVector.scale(scaleFactor);
 
     return scaledVector;
 }
