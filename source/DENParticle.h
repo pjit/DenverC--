@@ -9,5 +9,8 @@
 #ifndef __Denver__DENParticle__
 #define __Denver__DENParticle__
 
+class DENParticle {
+    
+};
 
 #endif /* defined(__Denver__DENParticle__) */

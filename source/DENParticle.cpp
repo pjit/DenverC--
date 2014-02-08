@@ -7,3 +7,7 @@
 //
 
 #include "DENParticle.h"
+
+//
+// DENParticle::Private
+//
