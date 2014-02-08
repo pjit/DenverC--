@@ -9,16 +9,18 @@
 /* Begin PBXBuildFile section */
 		8502AC6C18A333EE0071EBF2 /* DenVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 85AE777E18A1DCB500C5292C /* DenVector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8510213B18A5DAC1002E6F81 /* DENParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8510213918A5DAC1002E6F81 /* DENParticle.cpp */; };
-		8510213C18A5DAC1002E6F81 /* DENParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8510213A18A5DAC1002E6F81 /* DENParticle.h */; };
 		85AE778718A1DE4F00C5292C /* DenVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85AE778518A1DE4F00C5292C /* DenVector.cpp */; };
+		85D6863F18A6714600B74682 /* DENParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D6863E18A6714600B74682 /* DENParticle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85D6864018A672B500B74682 /* DENUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D6863D18A6710400B74682 /* DENUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8510213918A5DAC1002E6F81 /* DENParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DENParticle.cpp; path = source/DENParticle.cpp; sourceTree = "<group>"; };
-		8510213A18A5DAC1002E6F81 /* DENParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticle.h; path = source/DENParticle.h; sourceTree = "<group>"; };
 		85AE777718A1DADF00C5292C /* libDenver.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDenver.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		85AE777E18A1DCB500C5292C /* DenVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DenVector.h; path = include/DenVector.h; sourceTree = "<group>"; };
 		85AE778518A1DE4F00C5292C /* DenVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DenVector.cpp; path = source/DenVector.cpp; sourceTree = "<group>"; };
+		85D6863D18A6710400B74682 /* DENUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DENUtils.h; path = include/DENUtils.h; sourceTree = "<group>"; };
+		85D6863E18A6714600B74682 /* DENParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticle.h; path = include/DENParticle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,8 +37,9 @@
 		8502AC6A18A333480071EBF2 /* export */ = {
 			isa = PBXGroup;
 			children = (
-				8510213A18A5DAC1002E6F81 /* DENParticle.h */,
+				85D6863E18A6714600B74682 /* DENParticle.h */,
 				85AE777E18A1DCB500C5292C /* DenVector.h */,
+				85D6863D18A6710400B74682 /* DENUtils.h */,
 			);
 			name = export;
 			sourceTree = "<group>";
@@ -82,8 +85,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8510213C18A5DAC1002E6F81 /* DENParticle.h in Headers */,
+				85D6863F18A6714600B74682 /* DENParticle.h in Headers */,
 				8502AC6C18A333EE0071EBF2 /* DenVector.h in Headers */,
+				85D6864018A672B500B74682 /* DENUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,17 +16,17 @@
 //
 class DENVector::Private {
 public:
-    Private(double x = 0, double y = 0, double z = 0)
+    Private(DENReal x = 0, DENReal y = 0, DENReal z = 0)
     : mX(x), mY(y), mZ(z) {}
     Private(const Private& other) {
         mX = other.mX; mY = other.mY; mZ = other.mZ;
     }
-    Private() {}
+    ~Private() {}
     Private *clone() const { return new Private(*this); }
     // Invert individual components of a vector
     inline void invert() { mX = -mX; mY = -mY; mZ = -mZ; }
     // Scale vector with the given scale factor
-    inline void scale(double scaleFactor) {
+    inline void scale(DENReal scaleFactor) {
         mX *= scaleFactor;
         mY *= scaleFactor;
         mZ *= scaleFactor;
@@ -34,21 +34,21 @@ public:
     // Reset vector - set all components to 0
     inline void reset() { mX = mY = mZ = 0; }
     // Maginitue of a vector
-    double magnitude() const;
+    DENReal magnitude() const;
     // Square magnitude - square is faster than square root.
-    double squareMagnitude() const;
+    DENReal squareMagnitude() const;
     // Normalize the vector
     void normalize();
     const Private& operator=(const Private& rhs);
     const Private& operator+(const Private& rhs);
 public: // Ok to have them public - already hidden for clients
-    double mX, mY, mZ;
+    DENReal mX, mY, mZ;
 };
 
 //
 //
 //
-double DENVector::Private::magnitude() const
+DENReal DENVector::Private::magnitude() const
 {
     return sqrt(squareMagnitude());
 }
@@ -56,7 +56,7 @@ double DENVector::Private::magnitude() const
 //
 //
 //
-double DENVector::Private::squareMagnitude() const
+DENReal DENVector::Private::squareMagnitude() const
 {
     return mX*mX + mY*mY + mZ*mZ;
 }
@@ -66,7 +66,7 @@ double DENVector::Private::squareMagnitude() const
 //
 void DENVector::Private::normalize()
 {
-    double n = magnitude();
+    DENReal n = magnitude();
     
     if (n > 0) {
         mX /= n;
@@ -82,7 +82,7 @@ void DENVector::Private::normalize()
 //
 //
 //
-DENVector::DENVector(double x, double y, double z)
+DENVector::DENVector(DENReal x, DENReal y, DENReal z)
     : d(new Private(x,y,z))
 {
 }
@@ -106,7 +106,7 @@ void DENVector::invert()
 //
 //
 //
-void DENVector::scale(double scaleFactor)
+void DENVector::scale(DENReal scaleFactor)
 {
     d->scale(scaleFactor);
 }
@@ -122,7 +122,7 @@ void DENVector::reset()
 //
 //
 //
-inline double DENVector::x() const
+inline DENReal DENVector::x() const
 {
     return d->mX;
 }
@@ -130,7 +130,7 @@ inline double DENVector::x() const
 //
 //
 //
-inline double DENVector::y() const
+inline DENReal DENVector::y() const
 {
     return d->mY;
 }
@@ -138,7 +138,7 @@ inline double DENVector::y() const
 //
 //
 //
-inline double DENVector::z() const
+inline DENReal DENVector::z() const
 {
     return d->mZ;
 }
@@ -176,7 +176,7 @@ const DENVector& DENVector::operator=(const DENVector& rhs)
 //
 //
 //
-double DENVector::magnitude() const
+DENReal DENVector::magnitude() const
 {
     return d->magnitude();
 }
@@ -184,7 +184,7 @@ double DENVector::magnitude() const
 //
 //
 //
-double DENVector::squareMagnitude() const
+DENReal DENVector::squareMagnitude() const
 {
     return d->squareMagnitude();
 }
@@ -239,7 +239,7 @@ DENVector DENVector::normal(const DENVector& v)
 //
 //
 //
-DENVector DENVector::scale(const DENVector& v, double scaleFactor)
+DENVector DENVector::scale(const DENVector& v, DENReal scaleFactor)
 {
     DENVector scaledVector = v;
     

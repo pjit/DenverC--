@@ -10,6 +10,7 @@
 #define Denver_DenVector_h
 
 #include <boost/shared_ptr.hpp>
+#include "DENUtils.h"
 
 //
 // DENVector
@@ -18,7 +19,7 @@
 //
 class DENVector {
 public:
-    DENVector(double x = 0, double y = 0, double z = 0);
+    DENVector(DENReal x = 0, DENReal y = 0, DENReal z = 0);
     DENVector(const DENVector& other);
     ~DENVector() {}
     const DENVector& operator=(const DENVector& rhs);
@@ -26,17 +27,17 @@ public:
     // Invert individual components of a vector
     void invert();
     // Scale vector with the given scale factor
-    void scale(double scaleFactor);
+    void scale(DENReal scaleFactor);
     // Reset vector - set all components to 0
     void reset();
     // x, y, and x components
-    double x() const;
-    double y() const;
-    double z() const;
+    DENReal x() const;
+    DENReal y() const;
+    DENReal z() const;
     // Maginitue of a vector
-    double magnitude() const;
+    DENReal magnitude() const;
     // Square magnitude - square is faster than square root.
-    double squareMagnitude() const;
+    DENReal squareMagnitude() const;
     // Normalize the vector
     void normalize();
     // General methods which return new vector instead of modifying the existing vector.
@@ -44,7 +45,7 @@ public:
     static DENVector scalarProduct(const DENVector& v1, const DENVector& v2);
     static DENVector vectorProduct(const DENVector& v1, const DENVector& v2);
     static DENVector normal(const DENVector& v);
-    static DENVector scale(const DENVector& v, double scaleFactor);
+    static DENVector scale(const DENVector& v, DENReal scaleFactor);
 private:
     void swap(DENVector& other) { d.swap(other.d); }
 
