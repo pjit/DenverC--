@@ -16,7 +16,8 @@ class DENParticle {
 public:
     DENParticle();
     DENParticle(const DENParticle&);
-    ~DENParticle();
+    ~DENParticle() {}
+    const DENParticle& operator=(const DENParticle&);
     // Linear position,velocity of the particle in the world space.
     void setPosition(const DENVector&);
     void setVelocity(const DENVector&);
@@ -35,6 +36,12 @@ public:
     void setInverseMass(DENReal inversemass);
     void setMass(DENReal mass);
     DENReal getMass() const;
+    // All getters
+    const DENVector& getPosition() const;
+    const DENVector& getVelocity() const;
+    const DENVector& getAcceleration() const;
+    DENReal getDamping() const;
+    
     bool hasFiniteMass() const;
     // Add force for integration
     void addForce(const DENVector&);
@@ -48,6 +55,8 @@ public:
     //
     void integrate(DENReal duration);
 private:
+    void swap(DENParticle& other) { d.swap(other.d); }
+    
     class Private;
     
     boost::shared_ptr<Private> d;

@@ -19,7 +19,7 @@ class DENParticle::Private {
 public:
     Private();
     Private(const DENParticle&);
-    ~Private();
+    ~Private() {}
     Private *clone() const { return new Private(*this); }
     // Linear position,velocity of the particle in the world space.
     inline void setPosition(const DENVector& p) { mPosition = p; }
@@ -45,9 +45,9 @@ public:
     inline DENReal getMass() const;
     inline bool hasFiniteMass() const { return mInverseMass != 0; }
     // Add force for integration
-    void addForce(const DENVector&);
+    void addForce(const DENVector& force) { mForceAccum = mForceAccum + force; }
     // clear accumulated force
-    void clearAccumulator();
+    inline void clearAccumulator() { mForceAccum.reset(); }
     //
     // Integrates the particle forward in time by the given amount.
     // This function uses a Newton-Euler integration method, which
@@ -55,7 +55,7 @@ public:
     // reason it may be inaccurate in some cases.
     //
     void integrate(DENReal duration);
-private:
+public:
     // Linear position,velocity of the particle in the world space
     // These two properties should not be changed directly - only through
     // integrator but acceleration can be set directly.
@@ -112,7 +112,6 @@ void DENParticle::Private::integrate(DENReal duration)
 //
 //
 //
-//
 DENReal DENParticle::Private::getMass() const
 {
     if (mInverseMass == 0) {
@@ -122,3 +121,75 @@ DENReal DENParticle::Private::getMass() const
         return (1.0/mInverseMass);
     }
 }
+
+//
+//
+//
+DENParticle::DENParticle()
+    : d(new Private())
+{
+}
+
+//
+//
+//
+DENParticle::DENParticle(const DENParticle& other)
+: d(other.d->clone())
+{
+}
+
+//
+//
+//
+const DENParticle& DENParticle::operator=(const DENParticle& rhs)
+{
+    if (this != &rhs) {
+        DENParticle copy(rhs);
+        
+        d->mPosition = rhs.d->mPosition;
+        d->mVelocity = rhs.d->mVelocity;
+        d->mAcceleration = rhs.d->mAcceleration;
+        d->mForceAccum = rhs.d->mForceAccum;
+        d->mDamping = rhs.d->mDamping;
+        d->mInverseMass = rhs.d->mInverseMass;
+        
+        this->swap(copy);
+    }
+    
+    return *this;
+}
+
+//
+//
+//
+const DENVector& DENParticle::getPosition() const
+{
+    return d->mPosition;
+}
+
+//
+//
+//
+const DENVector& DENParticle::getVelocity() const
+{
+    return d->mVelocity;
+}
+
+//
+//
+//
+const DENVector& DENParticle::getAcceleration() const
+{
+    return d->mAcceleration;
+}
+
+//
+//
+//
+DENReal DENParticle::getDamping() const
+{
+    return d->mDamping;
+}
+
+
+

@@ -148,9 +148,9 @@ inline DENReal DENVector::z() const
 //
 const DENVector& DENVector::operator+(const DENVector& rhs)
 {
-    d->mX += rhs.x();
-    d->mY += rhs.y();
-    d->mZ += rhs.z();
+    d->mX += rhs.d->mX;
+    d->mY += rhs.d->mY;
+    d->mZ += rhs.d->mZ;
     
     return *this;
 }
@@ -163,9 +163,9 @@ const DENVector& DENVector::operator=(const DENVector& rhs)
     if (this != &rhs) {
         DENVector copy(rhs);
         
-        d->mX = rhs.x();
-        d->mY = rhs.y();
-        d->mZ = rhs.z();
+        d->mX = rhs.d->mX;
+        d->mY = rhs.d->mY;
+        d->mZ = rhs.d->mZ;
         
         this->swap(copy);
     }
