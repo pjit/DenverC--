@@ -8,7 +8,7 @@
 
 #include "DENParticle.h"
 #include <math.h>
-#include <limits.h>
+#include <float.h>
 
 //
 // DENParticle::Private
@@ -116,7 +116,7 @@ void DENParticle::Private::integrate(DENReal duration)
 DENReal DENParticle::Private::getMass() const
 {
     if (mInverseMass == 0) {
-        return MAX_VALUE;
+        return DEN_MAX;
     }
     else {
         return (1.0/mInverseMass);

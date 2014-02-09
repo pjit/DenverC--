@@ -32,7 +32,7 @@ public:
         mZ *= scaleFactor;
     }
     // Reset vector - set all components to 0
-    inline void reset() { mX = mY = mZ = 0; }
+    inline void reset(DENReal x, DENReal y, DENReal z) { mX = x; mY = y; mZ = z; }
     // Maginitue of a vector
     DENReal magnitude() const;
     // Square magnitude - square is faster than square root.
@@ -114,9 +114,9 @@ void DENVector::scale(DENReal scaleFactor)
 //
 //
 //
-void DENVector::reset()
+void DENVector::reset(DENReal x, DENReal y, DENReal z)
 {
-    d->reset();
+    d->reset(x, y, z);
 }
 
 //
@@ -209,9 +209,9 @@ DENVector DENVector::add(const DENVector& v1, const DENVector& v2)
 // scalarProduct or dotProduct
 //
 //
-DENVector DENVector::scalarProduct(const DENVector& v1, const DENVector& v2)
+DENReal DENVector::scalarProduct(const DENVector& v1, const DENVector& v2)
 {
-    return DENVector(v1.x()*v2.x(), v1.y()*v2.y(), v1.z()*v2.z());
+    return (v1.x()*v2.x() + v1.y()*v2.y() + v1.z()*v2.z());
 }
 
 //

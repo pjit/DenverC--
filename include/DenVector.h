@@ -28,8 +28,8 @@ public:
     void invert();
     // Scale vector with the given scale factor
     void scale(DENReal scaleFactor);
-    // Reset vector - set all components to 0
-    void reset();
+    // Reset vector - set all components to 0 or to the given values
+    void reset(DENReal x = 0, DENReal y = 0, DENReal z = 0);
     // x, y, and x components
     DENReal x() const;
     DENReal y() const;
@@ -42,8 +42,9 @@ public:
     void normalize();
     // General methods which return new vector instead of modifying the existing vector.
     static DENVector add(const DENVector& v1, const DENVector& v2);
-    static DENVector scalarProduct(const DENVector& v1, const DENVector& v2);
+    static DENReal scalarProduct(const DENVector& v1, const DENVector& v2);
     static DENVector vectorProduct(const DENVector& v1, const DENVector& v2);
+    // Normal to a given vector - same direction w/ magnitude one
     static DENVector normal(const DENVector& v);
     static DENVector scale(const DENVector& v, DENReal scaleFactor);
 private:

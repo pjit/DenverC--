@@ -12,6 +12,7 @@
 		85AE778718A1DE4F00C5292C /* DenVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85AE778518A1DE4F00C5292C /* DenVector.cpp */; };
 		85D6863F18A6714600B74682 /* DENParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D6863E18A6714600B74682 /* DENParticle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D6864018A672B500B74682 /* DENUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D6863D18A6710400B74682 /* DENUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85D81B6418A71EC6004D12DF /* DENUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85D81B6218A71EC6004D12DF /* DENUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		85AE778518A1DE4F00C5292C /* DenVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DenVector.cpp; path = source/DenVector.cpp; sourceTree = "<group>"; };
 		85D6863D18A6710400B74682 /* DENUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DENUtils.h; path = include/DENUtils.h; sourceTree = "<group>"; };
 		85D6863E18A6714600B74682 /* DENParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticle.h; path = include/DENParticle.h; sourceTree = "<group>"; };
+		85D81B6218A71EC6004D12DF /* DENUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DENUtils.cpp; path = source/DENUtils.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				85AE778518A1DE4F00C5292C /* DenVector.cpp */,
 				8510213918A5DAC1002E6F81 /* DENParticle.cpp */,
+				85D81B6218A71EC6004D12DF /* DENUtils.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85AE778718A1DE4F00C5292C /* DenVector.cpp in Sources */,
+				85D81B6418A71EC6004D12DF /* DENUtils.cpp in Sources */,
 				8510213B18A5DAC1002E6F81 /* DENParticle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

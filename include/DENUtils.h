@@ -9,7 +9,18 @@
 #ifndef Denver_DENUtils_h
 #define Denver_DENUtils_h
 
+#include <float.h>
+
 typedef double DENReal;
 
+#define DEN_MAX DBL_MAX
+#define DEN_MIN DBL_MIN
+
+//
+// DENRealEqual
+//
+// Equality comparison for DENReal
+//
+bool DENRealEqual(const DENReal&, const DENReal&);
 
 #endif
