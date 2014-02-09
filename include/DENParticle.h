@@ -40,8 +40,7 @@ public:
     const DENVector& getPosition() const;
     const DENVector& getVelocity() const;
     const DENVector& getAcceleration() const;
-    DENReal getDamping() const;
-    
+    DENReal getDamping() const;    
     bool hasFiniteMass() const;
     // Add force for integration
     void addForce(const DENVector&);
