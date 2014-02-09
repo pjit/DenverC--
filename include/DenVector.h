@@ -34,7 +34,7 @@ public:
     DENReal x() const;
     DENReal y() const;
     DENReal z() const;
-    // Maginitue of a vector
+    // Magnitude of a vector
     DENReal magnitude() const;
     // Square magnitude - square is faster than square root.
     DENReal squareMagnitude() const;

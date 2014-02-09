@@ -21,33 +21,6 @@ public:
     Private(const DENParticle&);
     ~Private() {}
     Private *clone() const { return new Private(*this); }
-    // Linear position,velocity of the particle in the world space.
-    inline void setPosition(const DENVector& p) { mPosition = p; }
-    inline void setVelocity(const DENVector& v) { mVelocity = v; }
-    // Acceleration of the particle. This value can be used to set acceleration due
-    // to gravity (its primary use) or any other constant acceleration
-    inline void setAcceleration(const DENVector& acc) { mAcceleration = acc; }
-    // Holds the amount of damping applied to linear motion. Dumping is required
-    // to remove energy added through numerical instability in the integrator
-    inline void setDamping(DENReal damping) { mDamping = damping; }
-    // Holds the inverse of the mass of the particle. It is more useful to hold
-    // the inverse mass because integration is simpler and because in real-time
-    // simulation i is more useful to have objects with infinite mass (immovable)
-    // than zero mass (completely unstable in numerical simulation)
-    // zero inverse mass = infinite mass  = immovable objects
-    // zero mass = infinite inverse mass.
-    inline void setInverseMass(DENReal inversemass) { mInverseMass = inversemass; }
-    inline void setMass(DENReal mass) {
-        if (mass > 0) {
-            mInverseMass = 1.0/mass;
-        }
-    }
-    inline DENReal getMass() const;
-    inline bool hasFiniteMass() const { return mInverseMass != 0; }
-    // Add force for integration
-    void addForce(const DENVector& force) { mForceAccum = mForceAccum + force; }
-    // clear accumulated force
-    inline void clearAccumulator() { mForceAccum.reset(); }
     //
     // Integrates the particle forward in time by the given amount.
     // This function uses a Newton-Euler integration method, which
@@ -81,6 +54,14 @@ public:
 
 //
 //
+//
+DENParticle::Private::Private()
+    : mDamping(0), mInverseMass(0)
+{
+}
+
+//
+//
 // DENParticle::Private::integrate
 //
 // Integrates the particle forward in time by the given amount.
@@ -105,20 +86,7 @@ void DENParticle::Private::integrate(DENReal duration)
         // Impose drag
         mVelocity.scale(pow(mDamping, duration));
         // Clear the forces
-        clearAccumulator();
-    }
-}
-
-//
-//
-//
-DENReal DENParticle::Private::getMass() const
-{
-    if (mInverseMass == 0) {
-        return DEN_MAX;
-    }
-    else {
-        return (1.0/mInverseMass);
+        mForceAccum.reset();
     }
 }
 
@@ -191,5 +159,97 @@ DENReal DENParticle::getDamping() const
     return d->mDamping;
 }
 
+//
+//
+//
+void DENParticle::setPosition(const DENVector& p)
+{
+    d->mPosition = p;
+}
+
+//
+//
+//
+void DENParticle::setVelocity(const DENVector& v)
+{
+    d->mVelocity = v;
+}
+
+//
+//
+//
+void DENParticle::setAcceleration(const DENVector& a)
+{
+    d->mAcceleration = a;
+}
+
+//
+//
+//
+void DENParticle::setDamping(DENReal damping)
+{
+    d->mDamping = damping;
+}
+
+//
+//
+//
+void DENParticle::setInverseMass(DENReal inverseMass)
+{
+    d->mInverseMass = inverseMass;
+}
+
+//
+//
+//
+void DENParticle::setMass(DENReal mass)
+{
+    // Holds the inverse of the mass of the particle. It is more useful to hold
+    // the inverse mass because integration is simpler and because in real-time
+    // simulation i is more useful to have objects with infinite mass (immovable)
+    // than zero mass (completely unstable in numerical simulation)
+    // zero inverse mass = infinite mass  = immovable objects
+    // zero mass = infinite inverse mass.
+    if (mass > 0) {
+        d->mInverseMass = 1.0/mass;
+    }
+}
+
+//
+//
+//
+DENReal DENParticle::getMass() const
+{
+    if (d->mInverseMass == 0) {
+        return DEN_MAX;
+    }
+    else {
+        return (1.0/d->mInverseMass);
+    }
+}
+
+//
+//
+//
+bool DENParticle::hasFiniteMass() const
+{
+    return d->mInverseMass != 0;
+}
+
+//
+// Add force for integration
+//
+void DENParticle::addForce(const DENVector& force)
+{
+    d->mForceAccum = d->mForceAccum + force;
+}
+
+//
+// clear accumulated force
+//
+void DENParticle::clearAccumulator()
+{
+    d->mForceAccum.reset();
+}
 
 
