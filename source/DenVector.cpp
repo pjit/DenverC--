@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 ijk. All rights reserved.
 //
 
-#include "DenVector.h"
+#include "DENVector.h"
 #include <math.h>
 
 //
@@ -151,6 +151,18 @@ const DENVector& DENVector::operator+(const DENVector& rhs)
     d->mX += rhs.d->mX;
     d->mY += rhs.d->mY;
     d->mZ += rhs.d->mZ;
+    
+    return *this;
+}
+
+//
+//
+//
+const DENVector& DENVector::operator-(const DENVector& rhs)
+{
+    d->mX -= rhs.d->mX;
+    d->mY -= rhs.d->mY;
+    d->mZ -= rhs.d->mZ;
     
     return *this;
 }

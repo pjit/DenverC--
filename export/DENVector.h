@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ijk. All rights reserved.
 //
 
-#ifndef Denver_DenVector_h
-#define Denver_DenVector_h
+#ifndef Denver_DENVector_h
+#define Denver_DENVector_h
 
 #include <boost/shared_ptr.hpp>
 #include "DENUtils.h"
@@ -24,6 +24,7 @@ public:
     ~DENVector() {}
     const DENVector& operator=(const DENVector& rhs);
     const DENVector& operator+(const DENVector& rhs);
+    const DENVector& operator-(const DENVector& rhs);
     // Invert individual components of a vector
     void invert();
     // Scale vector with the given scale factor
@@ -55,6 +56,5 @@ private:
     
     boost::shared_ptr<Private> d;
 };
-
 
 #endif

@@ -17,17 +17,19 @@
 //
 class DENParticle::Private {
 public:
-    Private();
-    Private(const DENParticle&);
-    ~Private() {}
-    Private *clone() const { return new Private(*this); }
-    //
-    // Integrates the particle forward in time by the given amount.
-    // This function uses a Newton-Euler integration method, which
-    // is a linear approximation of the correct integral. For this
-    // reason it may be inaccurate in some cases.
-    //
-    void integrate(DENReal duration);
+	Private();
+	Private(const DENParticle&);
+	~Private() {}
+	Private *clone() const { return new Private(*this); }
+	//
+	// Integrates the particle forward in time by the given amount.
+	// This function uses a Newton-Euler integration method, which
+	// is a linear approximation of the correct integral. For this
+	// reason it may be inaccurate in some cases.
+	//
+	void integrate(DENReal duration);
+	// Returns total force on the particle
+	const DENVector& getForce() const { return mForceAccum; }
 public:
     // Linear position,velocity of the particle in the world space
     // These two properties should not be changed directly - only through
@@ -149,6 +151,14 @@ const DENVector& DENParticle::getVelocity() const
 const DENVector& DENParticle::getAcceleration() const
 {
     return d->mAcceleration;
+}
+
+//
+//
+//
+const DENVector& DENParticle::getForce() const
+{
+	return d->getForce();
 }
 
 //

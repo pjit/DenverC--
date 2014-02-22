@@ -46,6 +46,8 @@ public:
     void addForce(const DENVector&);
     // clear accumulated force
     void clearAccumulator();
+	 //
+	const DENVector& getForce() const;
     //
     // Integrates the particle forward in time by the given amount.
     // This function uses a Newton-Euler integration method, which

@@ -7,21 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8502AC6C18A333EE0071EBF2 /* DenVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 85AE777E18A1DCB500C5292C /* DenVector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8510213B18A5DAC1002E6F81 /* DENParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8510213918A5DAC1002E6F81 /* DENParticle.cpp */; };
-		85AE778718A1DE4F00C5292C /* DenVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85AE778518A1DE4F00C5292C /* DenVector.cpp */; };
-		85D6863F18A6714600B74682 /* DENParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D6863E18A6714600B74682 /* DENParticle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		85D6864018A672B500B74682 /* DENUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D6863D18A6710400B74682 /* DENUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		859E7C5818B930A00060905B /* DENVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 859E7C5718B930A00060905B /* DENVector.cpp */; };
+		859E7C6118B932DE0060905B /* DENParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 859E7C5E18B932DE0060905B /* DENParticle.h */; };
+		859E7C6218B932DE0060905B /* DENUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 859E7C5F18B932DE0060905B /* DENUtils.h */; };
+		859E7C6318B932DE0060905B /* DENVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 859E7C6018B932DE0060905B /* DENVector.h */; };
+		859E7C6618B933CD0060905B /* DENParticleGravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 859E7C6418B933CD0060905B /* DENParticleGravity.cpp */; };
+		859E7C6A18B935020060905B /* DENParticleForce.h in Headers */ = {isa = PBXBuildFile; fileRef = 859E7C6818B935020060905B /* DENParticleForce.h */; };
+		859E7C6B18B935020060905B /* DENParticleGravity.h in Headers */ = {isa = PBXBuildFile; fileRef = 859E7C6918B935020060905B /* DENParticleGravity.h */; };
 		85D81B6418A71EC6004D12DF /* DENUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85D81B6218A71EC6004D12DF /* DENUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8510213918A5DAC1002E6F81 /* DENParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DENParticle.cpp; path = source/DENParticle.cpp; sourceTree = "<group>"; };
+		859E7C5718B930A00060905B /* DENVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DENVector.cpp; path = source/DENVector.cpp; sourceTree = "<group>"; };
+		859E7C5E18B932DE0060905B /* DENParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticle.h; path = export/DENParticle.h; sourceTree = "<group>"; };
+		859E7C5F18B932DE0060905B /* DENUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENUtils.h; path = export/DENUtils.h; sourceTree = "<group>"; };
+		859E7C6018B932DE0060905B /* DENVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENVector.h; path = export/DENVector.h; sourceTree = "<group>"; };
+		859E7C6418B933CD0060905B /* DENParticleGravity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DENParticleGravity.cpp; path = source/DENParticleGravity.cpp; sourceTree = "<group>"; };
+		859E7C6818B935020060905B /* DENParticleForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticleForce.h; path = export/DENParticleForce.h; sourceTree = "<group>"; };
+		859E7C6918B935020060905B /* DENParticleGravity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticleGravity.h; path = export/DENParticleGravity.h; sourceTree = "<group>"; };
 		85AE777718A1DADF00C5292C /* libDenver.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDenver.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		85AE777E18A1DCB500C5292C /* DenVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DenVector.h; path = include/DenVector.h; sourceTree = "<group>"; };
-		85AE778518A1DE4F00C5292C /* DenVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DenVector.cpp; path = source/DenVector.cpp; sourceTree = "<group>"; };
-		85D6863D18A6710400B74682 /* DENUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DENUtils.h; path = include/DENUtils.h; sourceTree = "<group>"; };
-		85D6863E18A6714600B74682 /* DENParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DENParticle.h; path = include/DENParticle.h; sourceTree = "<group>"; };
 		85D81B6218A71EC6004D12DF /* DENUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DENUtils.cpp; path = source/DENUtils.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,9 +45,11 @@
 		8502AC6A18A333480071EBF2 /* export */ = {
 			isa = PBXGroup;
 			children = (
-				85D6863E18A6714600B74682 /* DENParticle.h */,
-				85AE777E18A1DCB500C5292C /* DenVector.h */,
-				85D6863D18A6710400B74682 /* DENUtils.h */,
+				859E7C6818B935020060905B /* DENParticleForce.h */,
+				859E7C6918B935020060905B /* DENParticleGravity.h */,
+				859E7C5E18B932DE0060905B /* DENParticle.h */,
+				859E7C5F18B932DE0060905B /* DENUtils.h */,
+				859E7C6018B932DE0060905B /* DENVector.h */,
 			);
 			name = export;
 			sourceTree = "<group>";
@@ -74,9 +82,10 @@
 		85AE778018A1DE0D00C5292C /* source */ = {
 			isa = PBXGroup;
 			children = (
-				85AE778518A1DE4F00C5292C /* DenVector.cpp */,
+				859E7C5718B930A00060905B /* DENVector.cpp */,
 				8510213918A5DAC1002E6F81 /* DENParticle.cpp */,
 				85D81B6218A71EC6004D12DF /* DENUtils.cpp */,
+				859E7C6418B933CD0060905B /* DENParticleGravity.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";
@@ -88,9 +97,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85D6863F18A6714600B74682 /* DENParticle.h in Headers */,
-				8502AC6C18A333EE0071EBF2 /* DenVector.h in Headers */,
-				85D6864018A672B500B74682 /* DENUtils.h in Headers */,
+				859E7C6218B932DE0060905B /* DENUtils.h in Headers */,
+				859E7C6318B932DE0060905B /* DENVector.h in Headers */,
+				859E7C6A18B935020060905B /* DENParticleForce.h in Headers */,
+				859E7C6118B932DE0060905B /* DENParticle.h in Headers */,
+				859E7C6B18B935020060905B /* DENParticleGravity.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +156,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85AE778718A1DE4F00C5292C /* DenVector.cpp in Sources */,
+				859E7C6618B933CD0060905B /* DENParticleGravity.cpp in Sources */,
+				859E7C5818B930A00060905B /* DENVector.cpp in Sources */,
 				85D81B6418A71EC6004D12DF /* DENUtils.cpp in Sources */,
 				8510213B18A5DAC1002E6F81 /* DENParticle.cpp in Sources */,
 			);
@@ -188,6 +200,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "";
 			};
 			name = Debug;
 		};
@@ -228,7 +241,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"USER_HEADER_SEARCH_PATHS[arch=*]" = /Volumes/HDD/Users/psingh/Documents/Development/boost/include;
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include/boost/include;
 			};
 			name = Debug;
 		};
@@ -237,7 +250,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"USER_HEADER_SEARCH_PATHS[arch=*]" = /Volumes/HDD/Users/psingh/Documents/Development/boost/include;
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include/boost/include;
 			};
 			name = Release;
 		};
